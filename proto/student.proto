@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+package student;
+
+option go_package = "./pb";
+
+service Studentdex {
+  rpc Create(StudentRequest) returns (Student);
+  rpc Read(StudentFilter) returns (StudentListResponse);
+  rpc ReadOne(StudentID) returns (Student);
+  rpc Update(StudentUpdateRequest) returns (Student);
+  rpc Delete(StudentID) returns (google.protobuf.Empty);
+}
+
+
+message StudentRequest {
+  int32 id = 1;
+  string name = 2;
+  string grade = 3;
+}
+
+message Student {
+  int32 id = 1;
+  string name = 2;
+  string grade = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+message StudentListResponse { repeated Student student = 1; }
+
+message StudentFilter {};
+
+message StudentID { int32 id = 1; }
+
+message StudentUpdateRequest {
+  int32 id = 1;
+  string name = 2;
+  string grade = 3;
+}

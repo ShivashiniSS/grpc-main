@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  studentdex:
+    build: .
+    environment:
+      - DATABASE_URL=postgresql://postgres:root@db:5432/studentdex?sslmode=disable
+    ports:
+      - "8080:8080"
+
+  db:
+    image: "postgres:15"
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=studentdex
+    ports:
+      - "5432:5432"
